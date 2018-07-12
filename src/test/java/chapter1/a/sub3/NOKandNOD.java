@@ -29,11 +29,11 @@ public class NOKandNOD {
 
     public int nok(int ... values) {
 
-        return findNumbersComponents(values).stream().reduce(1, (a, b) -> a*b);
+        return Arrays.stream(findNumbersComponents(values)).reduce(1, (a, b) -> a*b);
     }
 
 
-    private ArrayList<Integer> findNumbersComponents(int[] input) {
+    private int[] findNumbersComponents(int[] input) {
         ArrayList<Integer> output = new ArrayList<>();
         for (int anInput : input) {
             int decomposingNumber = anInput;
@@ -44,7 +44,8 @@ public class NOKandNOD {
                 output.add(decomposingNumber);
             }
         }
-        return output;
+
+        return output.stream().mapToInt(i -> i).toArray();
     }
 
     private int simplifyMultipliersAndNumber(ArrayList<Integer> output, int decomposingNumber) {
